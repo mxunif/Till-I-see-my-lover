@@ -1,264 +1,728 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Susu ❤️ My Valentine</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For My Susu ❤️</title>
 
 <style>
-  body {
-    margin: 0;
-    font-family: "Segoe UI", sans-serif;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    color: white;
-    text-align: center;
-  }
+*{
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
 
-  .container {
-    background: rgba(255,255,255,0.22);
-    backdrop-filter: blur(12px);
-    padding: 35px;
-    border-radius: 22px;
-    max-width: 430px;
-    width: 90%;
-    box-shadow: 0 25px 45px rgba(0,0,0,0.25);
-  }
+body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    color:white;
+    text-align:center;
+    overflow-x:hidden;
+}
 
-  h1 { font-size: 2.6rem; }
-  h2 { margin: 15px 0; }
+.container{
+    width:90%;
+    max-width:500px;
+    margin:auto;
+    padding:30px;
+}
 
-  p {
-    font-size: 1.15rem;
-    line-height: 1.6;
-  }
+.card{
+    background:rgba(255,255,255,0.2);
+    backdrop-filter:blur(10px);
+    border-radius:25px;
+    padding:25px;
+    margin:25px 0;
+    box-shadow:0 0 25px rgba(0,0,0,.15);
+}
 
-  .arabic {
-    font-size: 1.3rem;
-    margin: 15px 0;
-  }
+h1{
+    font-size:40px;
+}
 
-  button, input {
-    padding: 14px 30px;
-    border-radius: 30px;
-    border: none;
-    font-size: 1rem;
-    margin-top: 15px;
-  }
+h2{
+    font-size:28px;
+}
 
-  button {
-    background: #ff2f68;
-    color: white;
-    cursor: pointer;
-  }
+button{
+    border:none;
+    padding:15px 25px;
+    border-radius:30px;
+    background:#ff4f81;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    margin:10px;
+}
 
-  #no {
-    background: white;
-    color: #ff2f68;
-    position: absolute;
-  }
+button:hover{
+    transform:scale(1.08);
+}
 
-  .signature {
-    margin-top: 30px;
-    font-style: italic;
-  }
+input{
+    padding:12px;
+    border-radius:20px;
+    border:none;
+    text-align:center;
+    font-size:18px;
+}
 
-  .heart {
-    position: fixed;
-    bottom: -20px;
-    font-size: 20px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.7;
-  }
+.hidden{
+    display:none;
+}
 
-  @keyframes floatUp {
-    to { transform: translateY(-110vh) scale(1.5); }
-  }
 
-  canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-  }
+/* FLAGS */
 
-  .hidden { display: none; }
+.flags{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin:20px;
+}
 
-  .letter, .laterMessage {
-    background: rgba(255,255,255,0.25);
-    padding: 25px;
-    border-radius: 18px;
-    margin-top: 20px;
-  }
+.flag{
+    width:90px;
+    height:60px;
+    border-radius:8px;
+    overflow:hidden;
+    border:2px solid white;
+}
 
-  .countdown {
-    margin-top: 20px;
-    font-size: 1.2rem;
-  }
+
+/* Benin */
+
+.benin{
+    display:flex;
+}
+
+.benin .green{
+    width:33%;
+    background:#008751;
+}
+
+.benin .right{
+    width:67%;
+}
+
+.benin .yellow{
+    height:50%;
+    background:#FCD116;
+}
+
+.benin .red{
+    height:50%;
+    background:#E8112D;
+}
+
+
+/* Syria */
+
+.syria div{
+    height:33.33%;
+}
+
+.syria .red{
+    background:#CE1126;
+}
+
+.syria .white{
+    background:white;
+    color:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.syria .black{
+    background:#000;
+}
+
+.stars{
+    color:#008000;
+    font-size:20px;
+}
+
+
+/* hearts */
+
+.heart{
+    position:fixed;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-10vh);
+    }
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+
+.distance{
+    font-size:20px;
+    line-height:2;
+}
+
+
+.message{
+    font-size:22px;
+    min-height:80px;
+}
+
+
 </style>
+
 </head>
 
 <body>
 
-<canvas id="confetti"></canvas>
 
-<audio id="song" loop>
-  <source src="https://files.catbox.moe/7x8f2r.mp3" type="audio/mpeg">
-</audio>
+<div class="container">
 
-<!-- 🔐 PASSWORD SCREEN -->
-<div class="container" id="lock">
-  <h2>Before you enter 💖</h2>
-  <p><strong>What is the date I made you mine?</strong></p>
-  <input type="text" id="password" placeholder="DD/MM/YY">
-  <br>
-  <button onclick="checkPassword()">Unlock ❤️</button>
-  <p id="error"></p>
+
+<div class="card" id="lock">
+
+<h1>For My Susu ❤️</h1>
+
+<p>
+Every day apart has only made me love you more.
+</p>
+
+<h3>
+What date did our story begin?
+</h3>
+
+<input id="password" placeholder="DD/MM/YY">
+
+<br>
+
+<button onclick="unlock()">
+Open My Heart ❤️
+</button>
+
+<p id="wrong"></p>
+
 </div>
 
-<!-- 💘 MAIN CONTENT -->
-<div class="container hidden" id="main">
-  <h1>Susu ❤️</h1>
 
-  <p>I made this just for you…</p>
 
-  <p class="arabic">
-    بحبك يا سوسو من كل قلبي، وما في شي بالدنيا بيشبه حبّي إلك
-  </p>
+<div id="website" class="hidden">
 
-  <p class="arabic">
-    إنتِ روحي، ودنيتي، وكل حياتي ❤️
-  </p>
 
-  <p>
-    I really and truly love you<br>
-    <strong>to the moon and back 🌙✨</strong>
-  </p>
+<div class="card">
 
-  <div class="countdown" id="countdown"></div>
+<h1>
+My Beautiful Sara ❤️
+</h1>
 
-  <h2>Will you be my Valentine? 💘</h2>
+<p>
+If you're reading this...
+</p>
 
-  <button id="yes">Yes 💕</button>
-  <button id="no">No 😢</button>
+<p>
+This is a little piece of my heart while I wait to see you again.
+</p>
 
-  <div id="result"></div>
 
-  <div class="letter hidden" id="letter">
-    <p>
-      <strong>My love, ya omri 💖</strong><br><br>
-      you’re the calm in my heart and the smile I look for every day.<br>
-      بحبك قد الدنيا، ووجودك بحياتي نعمة ما بتتعوض،<br>
-      <em>mon cœur</em> you’re my home, my peace, and my forever.<br><br>
-      معك بحس حالي كامل، وهل حب عم يكبر يوم بعد يوم،<br>
-      and I cannot wait until the day you truly belong to me.
-    </p>
-  </div>
+<div class="flags">
 
-  <div class="laterMessage hidden" id="later">
-    💝 I hope you like your gifts 🎁❤️
-  </div>
 
-  <div class="signature">
-    From your love, Mounif ❤️
-  </div>
+<div>
+
+<p>🇧🇯</p>
+
+<div class="flag benin">
+
+<div class="green"></div>
+
+<div class="right">
+<div class="yellow"></div>
+<div class="red"></div>
 </div>
 
+</div>
+
+</div>
+
+
+
+<div>
+
+<p>🇸🇾</p>
+
+<div class="flag syria">
+
+<div class="red"></div>
+
+<div class="white">
+<span class="stars">
+★ ★
+</span>
+</div>
+
+<div class="black"></div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+
+<h2>
+🌍 Distance Between Us
+</h2>
+
+
+<div class="distance">
+
+❤️ 2,229 miles
+
+<br>
+
+❤️ 3,587 kilometres
+
+<br>
+
+❤️ 3,587,000 metres
+
+
+<br><br>
+
+
+🇧🇯 That is about <b>5.1 Benin lengths</b>
+
+<br>
+
+🇸🇾 That is about <b>2 Aleppo-sized distances</b>
+
+
+</div>
+
+
+<p>
+No matter how far we are...
+my heart is always close to yours ❤️
+</p>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+
+<h2>
+⏳ Until I Hold You Again
+</h2>
+
+
+<h1 id="countdown">
+Loading...
+</h1>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+
+<h2>
+💌 Today's Message
+</h2>
+
+
+<div class="message" id="dailyMessage">
+
+Loading...
+
+</div>
+
+
+</div>
 <script>
-  // PASSWORD
-  function checkPassword() {
-    if (document.getElementById("password").value === "25/05/25") {
-      document.getElementById("lock").classList.add("hidden");
-      document.getElementById("main").classList.remove("hidden");
-      initLaterMessage();
-    } else {
-      document.getElementById("error").textContent =
-        "Hmm… only my girl knows that 💕";
-    }
-  }
 
-  // NO BUTTON
-  const noBtn = document.getElementById("no");
-  noBtn.addEventListener("mouseover", () => {
-    noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
-    noBtn.style.top = Math.random() * (window.innerHeight - 50) + "px";
-  });
 
-  // YES BUTTON
-  document.getElementById("yes").addEventListener("click", () => {
-    document.getElementById("result").innerHTML =
-      "<h2>YAY 🥹💖</h2><p>Susu, you just made me the happiest man alive.</p>";
-    document.getElementById("letter").classList.remove("hidden");
-    document.getElementById("song").play();
-    startConfetti();
-  });
+function unlock(){
 
-  // HEARTS
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 15 + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-  }, 400);
+let password=document.getElementById("password").value;
 
-  // CONFETTI
-  const canvas = document.getElementById("confetti");
-  const ctx = canvas.getContext("2d");
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  let confetti = [];
+if(password==="25/05/25"){
 
-  function startConfetti() {
-    for (let i = 0; i < 250; i++) {
-      confetti.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 6 + 4,
-        d: Math.random() * 8,
-        color: `hsl(${Math.random()*360},100%,70%)`
-      });
-    }
-    animate();
-  }
+document.getElementById("lock").style.display="none";
+document.getElementById("website").style.display="block";
 
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    confetti.forEach(c => {
-      ctx.beginPath();
-      ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
-      ctx.fillStyle = c.color;
-      ctx.fill();
-      c.y += c.d;
-      if (c.y > canvas.height) c.y = -10;
-    });
-    requestAnimationFrame(animate);
-  }
+startHearts();
 
-  // COUNTDOWN
-  const valentines = new Date("February 14, 2026 00:00:00").getTime();
-  setInterval(() => {
-    const now = new Date().getTime();
-    const d = valentines - now;
-    document.getElementById("countdown").innerHTML =
-      `⏳ ${Math.floor(d/86400000)} days ${Math.floor(d/3600000)%24}h ${Math.floor(d/60000)%60}m ${Math.floor(d/1000)%60}s until Valentine’s Day 💘`;
-  }, 1000);
+}
 
-  // LATER MESSAGE (3 days)
-  function initLaterMessage() {
-    const firstVisit = localStorage.getItem("firstVisit") || Date.now();
-    localStorage.setItem("firstVisit", firstVisit);
-    if (Date.now() - firstVisit > 3 * 86400000) {
-      document.getElementById("later").classList.remove("hidden");
-    }
-  }
+else{
+
+document.getElementById("wrong").innerHTML=
+"Only my favourite girl knows this one 🤍";
+
+}
+
+}
+
+
+
+
+
+// Countdown to reunion
+
+let reunionDate = new Date("September 4, 2026 00:00:00").getTime();
+
+
+setInterval(function(){
+
+let now=new Date().getTime();
+
+let distance=reunionDate-now;
+
+
+let days=Math.floor(distance/(1000*60*60*24));
+
+let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
+let minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+
+let seconds=Math.floor((distance%(1000*60))/1000);
+
+
+
+document.getElementById("countdown").innerHTML=
+days+" Days<br>"+
+hours+" Hours<br>"+
+minutes+" Minutes<br>"+
+seconds+" Seconds";
+
+
+},1000);
+
+
+
+
+
+
+// 67 reasons
+
+const messages=[
+
+"I miss your smell.",
+
+"I miss holding you in my arms.",
+
+"I miss gently grabbing both your cheeks.",
+
+"I miss playfully biting you.",
+
+"I miss how happy I feel whenever I learn a new Arabic word or phrase to surprise you.",
+
+"I miss hearing your voice.",
+
+"I miss seeing your smile.",
+
+"I miss your laugh.",
+
+"I miss your eyes.",
+
+"I miss calling you my love.",
+
+"I miss you calling me by my nickname.",
+
+"I miss our daily conversations.",
+
+"I miss saying good morning to you.",
+
+"I miss saying good night to you.",
+
+"I miss sharing my day with you.",
+
+"I miss listening to you talk about your day.",
+
+"I miss making you laugh.",
+
+"I miss you making me laugh.",
+
+"I miss feeling understood by you.",
+
+"I miss the comfort you give me.",
+
+"I miss your affection.",
+
+"I miss knowing you're there.",
+
+"I miss texting you throughout the day.",
+
+"I miss waiting for your replies.",
+
+"I miss seeing your name pop up on my phone.",
+
+"I miss looking at your photos.",
+
+"I miss imagining our future together.",
+
+"I miss planning trips with you.",
+
+"I miss dreaming about seeing you again.",
+
+"I miss hearing you say I love you.",
+
+"I miss telling you I love you.",
+
+"I miss your little habits.",
+
+"I miss your personality.",
+
+"I miss your kindness.",
+
+"I miss the way you make me feel special.",
+
+"I miss knowing you're smiling because of me.",
+
+"I miss the excitement you bring into my life.",
+
+"I miss our inside jokes.",
+
+"I miss the memories we've made together.",
+
+"I miss making new memories with you.",
+
+"I miss sharing funny videos with you.",
+
+"I miss talking about random things with you.",
+
+"I miss hearing your opinions.",
+
+"I miss your accent.",
+
+"I miss hearing you say my name.",
+
+"I miss your support.",
+
+"I miss encouraging each other.",
+
+"I miss praying for and with you.",
+
+"I miss imagining our reunion.",
+
+"I miss counting down the days until I see you.",
+
+"I miss feeling close to you.",
+
+"I miss holding your hand.",
+
+"I miss looking into your eyes in person.",
+
+"I miss walking beside you.",
+
+"I miss sitting with you in comfortable silence.",
+
+"I miss sharing meals with you.",
+
+"I miss celebrating the little moments with you.",
+
+"I miss the happiness you bring into my life.",
+
+"I miss the peace I feel when I'm with you.",
+
+"I miss feeling complete when you're with me.",
+
+"I miss the love we share.",
+
+"I miss making you feel loved.",
+
+"I miss knowing you're safe.",
+
+"I miss being close enough to hold you whenever I want.",
+
+"I miss all the little moments where I wish you were here with me.",
+
+"I miss the beautiful bond we've built together.",
+
+"I miss you because I love you more than words can ever explain."
+
+];
+
+
+
+// count days from 27 June
+
+let startDate=new Date("June 27, 2026").getTime();
+
+
+function updateMessage(){
+
+let today=new Date().getTime();
+
+
+let day=Math.floor(
+(today-startDate)/(1000*60*60*24)
+);
+
+
+if(day<0){
+day=0;
+}
+
+
+if(day>=messages.length){
+day=messages.length-1;
+}
+
+
+document.getElementById("dailyMessage").innerHTML=
+
+"Day "+(day+1)+" ❤️<br><br>"+
+messages[day];
+
+}
+
+
+updateMessage();
+
+
+
+
+
+
+// floating hearts
+
+function startHearts(){
+
+setInterval(()=>{
+
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"%";
+
+heart.style.fontSize=(15+Math.random()*25)+"px";
+
+heart.style.animationDuration=
+(3+Math.random()*5)+"s";
+
+
+document.body.appendChild(heart);
+
+
+setTimeout(()=>{
+
+heart.remove();
+
+},8000);
+
+
+},300);
+
+
+}
+
+
+
+
+
 </script>
+
+
+
+
+<div class="card">
+
+
+<h2>
+💌 A Little Surprise
+</h2>
+
+
+<p>
+
+The biggest gift isn't something wrapped...
+
+</p>
+
+
+<p>
+
+It's finally having you close again.
+
+</p>
+
+
+<p>
+
+I can't wait to have you in my arms,
+hold you tight,
+and make more beautiful memories together ❤️
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+
+<h2>
+🌙 Same Moon
+</h2>
+
+
+<p>
+
+Even when thousands of miles separate us...
+
+</p>
+
+
+<p>
+
+we are still looking at the same moon.
+
+</p>
+
+
+<p>
+
+Until I see you again, my Susu ❤️
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+</div>
+
 
 </body>
 </html>
